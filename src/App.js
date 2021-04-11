@@ -8,6 +8,7 @@ import "./App.scss";
 let nextId = 4;
 
 function App() {
+  const [selectedTodo, setSelectedTodo] = useState(null);
   const [insertToggle, setInsertToggle] = useState(false);
   const [todos, setTodos] = useState([
     {
@@ -62,6 +63,15 @@ function App() {
     );
   };
 
+  const onChangeSelectedTodo = (todo) => {
+    setSelectedTodo(todo);
+  };
+
+  const onRemove = (id) => {
+    onInsertToggle();
+    setTodos((todos) => todos.filter((todo) => todo.id !== id));
+  };
+
   return (
     <div className="App">
       <Template todoLength={todos.length}>
@@ -69,14 +79,17 @@ function App() {
           todos={todos}
           onCheckToggle={onCheckToggle}
           onInsertToggle={onInsertToggle}
+          onChangeSelectedTodo={onChangeSelectedTodo}
         />
         <div className="add-todo-button" onClick={onInsertToggle}>
           <MdAddCircle />
         </div>
         {insertToggle && (
           <TodoInsert
+            selectedTodo={selectedTodo}
             onInsertToggle={onInsertToggle}
             onInsertTodo={onInsertTodo}
+            onRemove={onRemove}
           />
         )}
       </Template>

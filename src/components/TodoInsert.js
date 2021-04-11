@@ -1,8 +1,13 @@
-import React, { useState } from "react";
-import { MdAddCircle } from "react-icons/md";
+import React, { useState, useEffect } from "react";
+import { MdAddCircle, MdDelete, MdEdit } from "react-icons/md";
 import "./TodoInsert.scss";
 
-const TodoInsert = ({ onInsertToggle, onInsertTodo }) => {
+const TodoInsert = ({
+  onInsertToggle,
+  onInsertTodo,
+  selectedTodo,
+  onRemove,
+}) => {
   const [value, setValue] = useState("");
 
   const onChange = (e) => {
@@ -16,8 +21,15 @@ const TodoInsert = ({ onInsertToggle, onInsertTodo }) => {
     onInsertToggle();
   };
 
+  //할일 목록을 눌렀을때 인풋값에 할일 목록 그 글자 그대로 나오게
+  useEffect(() => {
+    if (selectedTodo) {
+      setValue(selectedTodo.text);
+    }
+  }, [selectedTodo]);
+
   return (
-    <div>
+    <div className="insert-center">
       <div className="background" onClick={onInsertToggle}></div>
       <form onSubmit={onSubmit}>
         <input
@@ -25,9 +37,16 @@ const TodoInsert = ({ onInsertToggle, onInsertTodo }) => {
           value={value}
           onChange={onChange}
         ></input>
-        <button type="submit">
-          <MdAddCircle />
-        </button>
+        {selectedTodo ? (
+          <div className="rewrite">
+            <MdEdit />
+            <MdDelete onClick={() => onRemove(selectedTodo.id)} />
+          </div>
+        ) : (
+          <button type="submit">
+            <MdAddCircle />
+          </button>
+        )}
       </form>
     </div>
   );

@@ -2,7 +2,12 @@ import React from "react";
 import TodoItem from "./TodoItem";
 import "./TodoList.scss";
 
-const TodoList = ({ todos, onCheckToggle, onInsertToggle }) => {
+const TodoList = ({
+  todos,
+  onCheckToggle,
+  onInsertToggle,
+  onChangeSelectedTodo,
+}) => {
   return (
     <div className="TodoList">
       {todos.map((element) => (
@@ -11,6 +16,7 @@ const TodoList = ({ todos, onCheckToggle, onInsertToggle }) => {
           key={element.id}
           onCheckToggle={onCheckToggle}
           onInsertToggle={onInsertToggle}
+          onChangeSelectedTodo={onChangeSelectedTodo}
         ></TodoItem>
       ))}
     </div>
