@@ -52,10 +52,20 @@ function App() {
     }
   };
 
+  //클릭한 객체의 아이디를 찾아서 그 아이디와 일치하는 객체를 찾아서 해당 객체의
+  //checked를 불리언 값을 바꿔준다.
+  const onCheckToggle = (id) => {
+    setTodos((todos) =>
+      todos.map((element) =>
+        element.id === id ? { ...element, checked: !element.checked } : element
+      )
+    );
+  };
+
   return (
     <div className="App">
       <Template todoLength={todos.length}>
-        <TodoList todos={todos} />
+        <TodoList todos={todos} onCheckToggle={onCheckToggle} />
         <div className="add-todo-button" onClick={onInsertToggle}>
           <MdAddCircle />
         </div>

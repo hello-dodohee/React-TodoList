@@ -2,12 +2,16 @@ import React from "react";
 import { ImCheckboxChecked, ImCheckboxUnchecked } from "react-icons/im";
 import "./TodoItem.scss";
 
-const TodoItem = ({ todo }) => {
+const TodoItem = ({ todo, onCheckToggle }) => {
   const { id, text, checked } = todo;
   return (
     <div className="TodoItem">
       <div className={`content ${checked ? "checked" : ""}`}>
-        {checked ? <ImCheckboxChecked /> : <ImCheckboxUnchecked />}
+        {checked ? (
+          <ImCheckboxChecked onClick={() => onCheckToggle(id)} />
+        ) : (
+          <ImCheckboxUnchecked onClick={() => onCheckToggle(id)} />
+        )}
         <div className="text">{text}</div>
       </div>
     </div>
