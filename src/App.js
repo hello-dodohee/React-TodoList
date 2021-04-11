@@ -5,7 +5,7 @@ import TodoInsert from "./components/TodoInsert";
 import { MdAddCircle } from "react-icons/md";
 import "./App.scss";
 
-let nextId = 4;
+let nextId = 5;
 
 function App() {
   const [selectedTodo, setSelectedTodo] = useState(null);
@@ -33,7 +33,12 @@ function App() {
     },
   ]);
 
+  // +버튼을 누를때는 인풋안에 값이 아무것도 없게
+
   const onInsertToggle = () => {
+    if (selectedTodo) {
+      setSelectedTodo(null);
+    }
     setInsertToggle((prev) => !prev);
   };
 
@@ -72,6 +77,15 @@ function App() {
     setTodos((todos) => todos.filter((todo) => todo.id !== id));
   };
 
+  const onUpdate = (id, text) => {
+    onInsertToggle();
+    setTodos((todos) =>
+      todos.map((element) =>
+        element.id === id ? { ...element, text } : element
+      )
+    );
+  };
+
   return (
     <div className="App">
       <Template todoLength={todos.length}>
@@ -90,6 +104,7 @@ function App() {
             onInsertToggle={onInsertToggle}
             onInsertTodo={onInsertTodo}
             onRemove={onRemove}
+            onUpdate={onUpdate}
           />
         )}
       </Template>

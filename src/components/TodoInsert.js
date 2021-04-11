@@ -7,6 +7,7 @@ const TodoInsert = ({
   onInsertTodo,
   selectedTodo,
   onRemove,
+  onUpdate,
 }) => {
   const [value, setValue] = useState("");
 
@@ -31,7 +32,15 @@ const TodoInsert = ({
   return (
     <div className="insert-center">
       <div className="background" onClick={onInsertToggle}></div>
-      <form onSubmit={onSubmit}>
+      <form
+        onSubmit={
+          selectedTodo
+            ? () => {
+                onUpdate(selectedTodo.id, value);
+              }
+            : onSubmit
+        }
+      >
         <input
           placeholder="오늘의 할일은 무엇인가요?"
           value={value}
@@ -39,7 +48,7 @@ const TodoInsert = ({
         ></input>
         {selectedTodo ? (
           <div className="rewrite">
-            <MdEdit />
+            <MdEdit onClick={() => onUpdate(selectedTodo.id, value)} />
             <MdDelete onClick={() => onRemove(selectedTodo.id)} />
           </div>
         ) : (
