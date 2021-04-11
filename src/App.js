@@ -65,7 +65,11 @@ function App() {
   return (
     <div className="App">
       <Template todoLength={todos.length}>
-        <TodoList todos={todos} onCheckToggle={onCheckToggle} />
+        <TodoList
+          todos={todos}
+          onCheckToggle={onCheckToggle}
+          onInsertToggle={onInsertToggle}
+        />
         <div className="add-todo-button" onClick={onInsertToggle}>
           <MdAddCircle />
         </div>
