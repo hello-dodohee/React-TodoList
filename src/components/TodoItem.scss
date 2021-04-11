@@ -1,0 +1,29 @@
+.TodoItem {
+    margin:auto;
+    border-radius:5px;
+    box-shadow: 1px 2px 5px 1px #ccc;
+    padding:1rem;
+    display:flex;
+    align-items:center;
+    margin-bottom:15px;
+
+    .content {
+        cursor:pointer;
+        flex:1;
+        display:flex;
+        align-items:center;
+    }
+
+    .content svg {
+        font-size:1.5rem;
+        color:rgb(19, 22, 54);
+        margin-right:1rem;
+    }
+
+    .content.checked .text {
+        color:rgb(19, 22, 54);
+        text-decoration: line-through;
+        cursor:pointer;
+        opacity: 0.6;
+    }
+}
